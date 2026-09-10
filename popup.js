@@ -20,7 +20,7 @@ async function save() { await chrome.storage.local.set({ trackerState: state });
 async function load() {
   const stored = await chrome.storage.local.get('trackerState');
   state = { ...DEFAULTS, ...stored.trackerState };
-  checkReset(); render();
+  checkReset(); await save(); render();
 }
 function checkReset() {
   if (Date.now() >= state.resetAt) {

@@ -20,4 +20,4 @@ All tracker data is stored in `chrome.storage.local` in the current browser prof
 
 ## In-Claude widget
 
-When you visit `claude.ai`, the extension also displays a compact tracker alongside the prompt area. It mirrors the popup's remaining messages and reset countdown in real time. Minimize it with the `−` control and select the pill to expand it again. Use the toolbar popup to log messages or change the tracking configuration.
+When you visit `claude.ai`, the extension also displays a compact tracker alongside the prompt area. It mirrors the popup's remaining messages and reset countdown in real time. Minimize it with the `−` control and select the pill to expand it again. Use the **+ Log message** and **Undo** controls directly in the widget, or use the toolbar popup to change the tracking configuration.

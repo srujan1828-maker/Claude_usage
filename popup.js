@@ -1,4 +1,4 @@
-const DEFAULTS = { limit: 50, used: 0, windowHours: 5, resetAt: Date.now() + 5 * 60 * 60 * 1000 };
+const DEFAULTS = { limit: 50, used: 0, inputTokens: 0, windowHours: 5, resetAt: Date.now() + 5 * 60 * 60 * 1000 };
 const $ = (id) => document.getElementById(id);
 let state;
 
@@ -25,6 +25,8 @@ async function load() {
 function checkReset() {
   if (Date.now() >= state.resetAt) {
     state.used = 0;
+    state.inputTokens = 0;
+    state.sessionStartedAt = Date.now();
     state.resetAt = Date.now() + state.windowHours * 3600000;
     save();
   }
@@ -37,6 +39,7 @@ function render() {
   $('usedCount').textContent = state.used;
   $('limitCount').textContent = state.limit;
   $('remainingCount').textContent = left;
+  $('tokenCount').textContent = state.inputTokens.toLocaleString();
   $('progressBar').style.width = `${Math.min(100, (state.used / state.limit) * 100)}%`;
   document.querySelector('.meter').style.setProperty('--percent', `${leftPercent}%`);
   $('countdown').textContent = formatCountdown(state.resetAt - Date.now());
@@ -65,7 +68,7 @@ $('settingsForm').addEventListener('submit', async (event) => {
   await save(); $('settingsDialog').close(); render(); notice('Usage window updated.');
 });
 $('startFresh').addEventListener('click', async () => {
-  state.used = 0; state.resetAt = Date.now() + state.windowHours * 3600000;
+  state.used = 0; state.inputTokens = 0; state.sessionStartedAt = Date.now(); state.resetAt = Date.now() + state.windowHours * 3600000;
   await save(); $('resetInput').value = localDateTimeValue(state.resetAt); render(); notice('Started a fresh usage window.');
 });
 load(); setInterval(render, 30000);

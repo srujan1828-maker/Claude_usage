@@ -1,0 +1,13 @@
+#claude-usage-widget {
+  --cut-ink: #292522; --cut-muted: #756e66; --cut-orange: #d97742; --cut-soft: #f8eee6;
+  position: fixed; z-index: 2147483647; right: 20px; bottom: 88px; width: 248px;
+  padding: 13px 14px; border: 1px solid rgba(77, 57, 38, .14); border-radius: 15px;
+  color: var(--cut-ink); background: rgba(255, 253, 250, .97); box-shadow: 0 10px 35px rgba(39, 28, 17, .16);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif; backdrop-filter: blur(12px);
+}
+#claude-usage-widget * { box-sizing: border-box; }
+.cut-head { display:flex; align-items:center; gap:7px; margin-bottom:10px; font-size:11px; font-weight:750; letter-spacing:.01em; }
+.cut-dot { width:7px; height:7px; border-radius:50%; background:#4d926c; box-shadow:0 0 0 3px #e7f2eb; }.cut-close { margin-left:auto; padding:0 2px; border:0; color:var(--cut-muted); background:transparent; font-size:17px; line-height:14px; cursor:pointer; }
+.cut-row { display:flex; align-items:center; gap:11px; }.cut-ring { --value:100%; width:51px; height:51px; display:grid; place-items:center; flex:0 0 auto; position:relative; border-radius:50%; background:conic-gradient(var(--cut-orange) var(--value), #f4ded0 0); }.cut-ring::before { content:""; position:absolute; width:41px; height:41px; border-radius:50%; background:#fffdfa; }.cut-ring span { z-index:1; font-family:Georgia,serif; font-size:14px; font-weight:700; }.cut-details { min-width:0; flex:1; }.cut-remaining { font-family:Georgia,serif; font-size:16px; font-weight:700; }.cut-remaining small,.cut-reset { color:var(--cut-muted); font:11px/1.3 Inter,ui-sans-serif,system-ui,sans-serif; }.cut-reset { margin-top:3px; }.cut-progress { height:4px; overflow:hidden; margin-top:11px; border-radius:4px; background:#f4ded0; }.cut-progress div { width:0; height:100%; border-radius:inherit; background:var(--cut-orange); transition:width .2s ease; }
+#claude-usage-widget.cut-minimized { width:auto; padding:8px 11px; border-radius:999px; cursor:pointer; }.cut-minimized .cut-row,.cut-minimized .cut-progress { display:none; }.cut-minimized .cut-head { margin:0; }.cut-minimized .cut-close { display:none; }
+@media (max-width: 600px) { #claude-usage-widget { right:12px; bottom:76px; } }

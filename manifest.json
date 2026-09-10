@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Claude Usage Tracker",
+  "version": "1.0.0",
+  "description": "A private, local dashboard for keeping tabs on your Claude usage window.",
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_title": "Claude Usage Tracker",
+    "default_popup": "popup.html"
+  },
+  "host_permissions": [
+    "https://claude.ai/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://claude.ai/*"
+      ],
+      "js": [
+        "widget.js"
+      ],
+      "css": [
+        "widget.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

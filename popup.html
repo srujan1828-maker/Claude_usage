@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Claude Usage Tracker</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand-mark" aria-hidden="true">C</div>
+        <div>
+          <p class="eyebrow">Usage monitor</p>
+          <h1>Claude tracker</h1>
+        </div>
+        <button class="icon-button" id="settingsButton" aria-label="Open usage settings" title="Usage settings">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5Zm8.32 3.02-1.68-.26a6.86 6.86 0 0 0-.66-1.58l1-1.37a.85.85 0 0 0-.08-1.1l-1.9-1.9a.85.85 0 0 0-1.1-.08l-1.37 1a6.86 6.86 0 0 0-1.58-.66l-.26-1.68A.85.85 0 0 0 12.85 3h-2.7a.85.85 0 0 0-.84.72l-.26 1.68a6.86 6.86 0 0 0-1.58.66l-1.37-1a.85.85 0 0 0-1.1.08l-1.9 1.9a.85.85 0 0 0-.08 1.1l1 1.37a6.86 6.86 0 0 0-.66 1.58l-1.68.26a.85.85 0 0 0-.72.84v2.7c0 .42.3.78.72.84l1.68.26c.16.56.38 1.09.66 1.58l-1 1.37a.85.85 0 0 0 .08 1.1l1.9 1.9a.85.85 0 0 0 1.1.08l1.37-1c.49.28 1.02.5 1.58.66l.26 1.68c.06.42.42.72.84.72h2.7c.42 0 .78-.3.84-.72l.26-1.68c.56-.16 1.09-.38 1.58-.66l1.37 1a.85.85 0 0 0 1.1-.08l1.9-1.9a.85.85 0 0 0 .08-1.1l-1-1.37c.28-.49.5-1.02.66-1.58l1.68-.26a.85.85 0 0 0 .72-.84v-2.7a.85.85 0 0 0-.72-.84Z"/></svg>
+        </button>
+      </header>
+
+      <section class="usage-card" aria-labelledby="usageHeading">
+        <div class="usage-heading"><span class="status-dot"></span><span id="usageHeading">Current usage window</span></div>
+        <div class="meter-layout">
+          <div class="meter" aria-label="Usage remaining"><div class="meter-value"><strong id="remainingPercent">100%</strong><span>left</span></div></div>
+          <div class="usage-stats">
+            <p><span>Messages used</span><strong id="usedCount">0</strong></p>
+            <p><span>Window limit</span><strong id="limitCount">50</strong></p>
+            <p><span>Messages left</span><strong id="remainingCount">50</strong></p>
+          </div>
+        </div>
+        <div class="progress-track" aria-hidden="true"><div id="progressBar" class="progress-bar"></div></div>
+      </section>
+
+      <section class="reset-card">
+        <div class="reset-label"><span class="clock-icon">◷</span> Resets in</div>
+        <output id="countdown" class="countdown" aria-live="polite">5h 00m</output>
+        <p id="resetAt" class="reset-at">Today at 5:00 PM</p>
+      </section>
+
+      <section class="actions" aria-label="Usage actions">
+        <button id="addMessage" class="primary-button">+ Log a message</button>
+        <button id="undoMessage" class="secondary-button" title="Undo last logged message">Undo</button>
+      </section>
+
+      <p id="notice" class="notice" role="status">Tracking is stored only in this browser.</p>
+    </main>
+
+    <dialog id="settingsDialog">
+      <form id="settingsForm" method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">Configure</p><h2>Usage window</h2></div><button class="close-button" value="cancel" aria-label="Close settings">×</button></div>
+        <label>Messages per window<input id="limitInput" type="number" min="1" max="10000" required /></label>
+        <label>Window length (hours)<input id="hoursInput" type="number" min="0.25" step="0.25" max="168" required /></label>
+        <label>Reset date and time<input id="resetInput" type="datetime-local" required /></label>
+        <div class="dialog-actions"><button id="startFresh" type="button" class="text-button">Start fresh</button><button id="saveSettings" class="primary-button" value="default">Save changes</button></div>
+      </form>
+    </dialog>
+    <script src="popup.js"></script>
+  </body>
+</html>
